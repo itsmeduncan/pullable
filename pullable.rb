@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'fileutils'
 
-pulled, skipped, failed = [], [], {}
+pulled, skipped, failed = [], [], []
 
 root = ARGF.argv[0]
 
@@ -11,12 +11,12 @@ Dir.foreach(root) do |directory|
   if File.directory?(directory)
     FileUtils.cd(directory)
 
-    output = `git pull`
+    `git pull`
 
     FileUtils.cd(root)
 
     unless $?.success?
-      failed[directory.to_sym] = output
+      failed << directory
     else
       pulled << directory
 
