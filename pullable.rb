@@ -11,6 +11,7 @@ Dir.foreach(root) do |directory|
     FileUtils.cd(directory)
 
     `git pull`
+    `git remote prune origin`
 
     FileUtils.cd(root)
 
