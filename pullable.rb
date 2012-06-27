@@ -8,6 +8,7 @@ raise ArgumentError.new("Please pass a root directoy!") if root.nil?
 
 Dir.foreach(root) do |directory|
   if File.directory?(directory)
+    puts "Pulling: #{directory}"
     FileUtils.cd(directory)
 
     `git pull`
@@ -19,9 +20,6 @@ Dir.foreach(root) do |directory|
       failed << directory
     else
       pulled << directory
-
-      print '.'
-      $stdout.flush
     end
   else
     skipped << directory
