@@ -8,11 +8,13 @@ raise ArgumentError.new("Please pass a root directoy!") if root.nil?
 
 Dir.foreach(root) do |directory|
   if File.directory?(directory)
-    puts "Pulling: #{directory}"
     FileUtils.cd(directory)
 
-    `git pull`
-    `git remote prune origin`
+    if File.directory?('.git')
+      puts "Pulling: #{directory}"
+      `git pull`
+      `git remote prune origin`
+    end
 
     FileUtils.cd(root)
 
