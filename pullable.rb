@@ -5,6 +5,7 @@ pulled, skipped, failed = [], [], []
 root = ARGF.argv[0]
 
 raise ArgumentError.new("Please pass a root directoy!") if root.nil?
+raise ArgumentError.new("Please pass a valid root directoy!") unless File.directory?(root)
 
 Dir.foreach(root) do |directory|
   if File.directory?(directory)
