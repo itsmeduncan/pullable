@@ -13,17 +13,17 @@ Dir.foreach(root) do |directory|
 
     if File.directory?('.git')
       puts "Pulling: #{directory}"
-      `git pull`
-      `git remote prune origin`
+      `git fetch -p`
+      `git merge --ff-only origin/master`
     end
-
-    FileUtils.cd(root)
 
     unless $?.success?
       failed << directory
     else
       pulled << directory
     end
+
+    FileUtils.cd(root)
   else
     skipped << directory
   end
