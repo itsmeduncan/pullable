@@ -7,23 +7,27 @@ root = ARGF.argv[0]
 raise ArgumentError.new("Please pass a root directoy!") if root.nil?
 raise ArgumentError.new("Please pass a valid root directoy!") unless File.directory?(root)
 
+SKIPPED_DIRECTORIES = ['.DS_Store']
+
 Dir.foreach(root) do |directory|
   if File.directory?(directory)
-    FileUtils.cd(directory)
+    unless SKIPPED_DIRECTORIES.include?(directory)
+      FileUtils.cd(directory)
 
-    if File.directory?('.git')
-      puts "Pulling: #{directory}"
-      `git fetch -p`
-      `git merge --ff-only origin/master`
+      if File.directory?('.git')
+        puts "Pulling: #{directory}"
+        `git fetch -p`
+        `git merge --ff-only origin/master`
+      end
+
+      unless $?.success?
+        failed << directory
+      else
+        pulled << directory
+      end
+
+      FileUtils.cd(root)
     end
-
-    unless $?.success?
-      failed << directory
-    else
-      pulled << directory
-    end
-
-    FileUtils.cd(root)
   else
     skipped << directory
   end
