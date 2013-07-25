@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'pullable'
+
+Pullable.process!(ARGF.argv[0])
