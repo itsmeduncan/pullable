@@ -17,7 +17,7 @@ module Pullable
           FileUtils.cd(directory)
 
           if File.directory?('.git')
-            puts "Pulling: #{directory}"
+            puts "Pulling:\t#{directory}"
             `git fetch -p`
             `git merge --ff-only origin/master`
           end
@@ -35,8 +35,8 @@ module Pullable
       end
     end
 
-    puts "Pulled\t#{pulled.inspect}"
-    puts "Skipped\t#{skipped.inspect}"
-    puts "Failed\t#{failed.inspect}"
+    puts "Pulled:\t\t#{pulled.inspect}" unless pulled.empty?
+    puts "Skipped:\t#{skipped.inspect}" unless skipped.empty?
+    puts "Failed:\t\t#{failed.inspect}" unless failed.empty?
   end
 end
