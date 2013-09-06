@@ -1,5 +1,7 @@
 # Pullable
 
+[![Build Status](https://travis-ci.org/itsmeduncan/pullable.png?branch=master)](https://travis-ci.org/itsmeduncan/pullable)
+
 Loop over a directory of Git repositories, fetch, and fast-forward merge from
 origin.
 
@@ -19,9 +21,28 @@ Or install it yourself as:
 
 ## Usage
 
-```ruby
-pullable ~/Projects
-```
+    ls ~/Projects
+    foo    bar    .DS_Store
+
+    pullable ~/Projects
+    # cd ~/Projects
+    # cd ~/Projects/foo
+    # git fetch -p && git merge --ff-only origin/master
+    # cd ~/Projects/bar
+    # git fetch -p && git merge --ff-only origin/master
+     
+    pullable ~/Projects pull
+    # cd ~/Projects
+    # cd ~/Projects/foo
+    # git fetch -p && git pull origin master
+    # cd ~/Projects/bar
+    # git fetch -p && git pull origin master
+
+## TODO
+
+* Logging
+* Finer grain command line options
+* Grit?
 
 ## Contributing
 

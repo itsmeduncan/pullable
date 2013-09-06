@@ -2,4 +2,4 @@
 
 require 'pullable'
 
-Pullable.process!(ARGF.argv[0])
+Pullable.process!(ARGF.argv[0], ARGF.argv[1])

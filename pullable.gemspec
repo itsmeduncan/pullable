@@ -4,21 +4,23 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'pullable/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "pullable"
+  spec.name          = 'pullable'
   spec.version       = Pullable::VERSION
-  spec.authors       = ["Duncan Grazier"]
-  spec.email         = ["itsmeduncan@gmail.com"]
+  spec.authors       = ['Duncan Grazier']
+  spec.email         = ['itsmeduncan@gmail.com']
   spec.description   = %q{Update your Git repositories}
   spec.summary       = %q{A simple tool to update your local repositories}
-  spec.homepage      = "https://github.com/itsmeduncan/pullable"
-  spec.license       = "MIT"
+  spec.homepage      = 'https://github.com/itsmeduncan/pullable'
+  spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths = ["lib"]
+  spec.require_paths = ['lib']
 
-  spec.add_development_dependency "bundler", "~> 1.3"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec"
+  spec.add_development_dependency 'bundler', '~> 1.3'
+  spec.add_development_dependency 'mocha'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'simplecov'
 end
