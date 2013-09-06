@@ -11,4 +11,14 @@ describe Pullable do
     Pullable.process!('foo', 'bar')
   end
 
+  it 'handles a blank string for the method' do
+    Pullable::Directory.expects(:process!).with('foo', 'merge')
+    Pullable.process!('foo', '')
+  end
+
+  it 'handles a nil method' do
+    Pullable::Directory.expects(:process!).with('foo', 'merge')
+    Pullable.process!('foo')
+  end
+
 end
