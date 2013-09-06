@@ -23,12 +23,12 @@ module Pullable
 
     def process!
       Dir.foreach(path) do |directory|
-        raise directory.inspect
         if File.directory?(directory)
           unless SKIPPED_DIRECTORIES.include?(directory)
             FileUtils.cd(directory)
 
-            if File.directory?(File.join(directory, '.git'))
+            if File.directory?('.git')
+              puts "Updated:\t#{directory}"
               update!
             end
 
