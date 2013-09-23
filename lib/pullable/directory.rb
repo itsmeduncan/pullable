@@ -28,8 +28,7 @@ module Pullable
             FileUtils.cd(directory)
 
             if File.directory?('.git')
-              puts "Updated:\t#{directory}"
-              update!
+              Pullable::Processor.update!(method, directory)
             end
 
             FileUtils.cd(path)
@@ -42,19 +41,5 @@ module Pullable
       new(path, method).process!
     end
 
-    def update!
-      system "git fetch -p && #{command} > /dev/null"
-    end
-
-    def command
-      case @method
-      when 'merge'
-        'git merge --ff-only origin/master'
-      when 'pull'
-        'git pull origin master'
-      else
-        raise NotImplementedError
-      end
-    end
   end
 end

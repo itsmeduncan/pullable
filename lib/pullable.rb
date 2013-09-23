@@ -1,4 +1,5 @@
 require 'pullable/directory'
+require 'pullable/processor'
 require 'pullable/version'
 
 module Pullable
