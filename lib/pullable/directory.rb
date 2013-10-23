@@ -27,7 +27,7 @@ module Pullable
           unless SKIPPED_DIRECTORIES.include?(directory)
             FileUtils.cd(directory)
 
-            if File.directory?('.git')
+            if Dir.exists?('.git')
               Pullable::Processor.update!(method, directory)
             end
 
