@@ -4,12 +4,14 @@ class Pullable::Processor
 
   CONFIG_FILE = ".pullable.yml"
 
-  attr_reader :method, :directory, :options
+  attr_reader :method, :directory, :options, :branch
 
   def initialize(method, directory, options = {})
     @method    = method
     @directory = directory
     @options   = options
+
+    @branch    = `git rev-parse --abbrev-ref HEAD` || 'master'
   end
 
   def self.update!(method, directory)
@@ -25,7 +27,7 @@ class Pullable::Processor
 
   def mirror!(options = {})
     remote = options['mirror']['remote'] rescue 'upstream'
-    run "git pull #{remote} master && git push origin master"
+    run "git pull #{remote} #{branch} && git push origin #{branch}"
   end
 
   def update!(options = {})
@@ -40,9 +42,9 @@ class Pullable::Processor
   def command
     case method
     when 'merge'
-      'git merge --ff-only origin/master'
+      "git merge --ff-only origin/#{branch}"
     when 'pull'
-      'git pull origin master'
+      "git pull origin #{branch}"
     else
       raise NotImplementedError
     end
